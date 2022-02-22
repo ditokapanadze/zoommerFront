@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Header from "./components/header/Headaer";
+import Sidebar from "./components/header/sidebar/Sidebar";
+import Slider from "./components/slider/Slider";
+import Offers from "./components/offers/Offers";
+import { useDisclosure } from "@chakra-ui/react";
 
 function App() {
+  const { isOpen, onToggle } = useDisclosure();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header onToggle={onToggle} />
+      <Sidebar isOpen={isOpen} onToggle={onToggle} />
+      <Slider />
+      <Offers />
     </div>
   );
 }
