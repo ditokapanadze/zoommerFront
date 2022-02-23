@@ -23,7 +23,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 function SignIn({ toggleAuthModal }) {
   const { isOpen, onToggle } = useDisclosure();
   const [showPass, setShowPass] = useState(false);
-  console.log(toggleAuthModal);
+
   return (
     <Box
       overflow="hidden"

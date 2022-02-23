@@ -4,14 +4,14 @@ import { BsSearch, BsCart3 } from "react-icons/bs";
 
 import menuIcon from "../../assets/img/menu.svg";
 import logo from "../../assets/img/logo.svg";
-import { Height } from "@material-ui/icons";
-function Headaer({ onToggle }) {
-  console.log(onToggle);
+
+function Headaer({ sidebarToggle, sidebarOpen }) {
+  console.log(sidebarOpen);
   return (
     <Box p={15} bg="white">
       <Flex justify="space-between" align="center">
         <Flex align="center">
-          <Box onClick={onToggle}>
+          <Box onClick={sidebarToggle}>
             <Image
               src={menuIcon}
               alt="menu icon"

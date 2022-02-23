@@ -8,12 +8,12 @@ import Offers from "./components/offers/Offers";
 import { useDisclosure } from "@chakra-ui/react";
 
 function App() {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen: sidebarOpen, onToggle: sidebarToggle } = useDisclosure();
 
   return (
     <div className="App">
-      <Header onToggle={onToggle} />
-      <Sidebar isOpen={isOpen} onToggle={onToggle} />
+      <Header sidebarToggle={sidebarToggle} sidebarOpen={sidebarOpen} />
+      <Sidebar sidebarOpen={sidebarOpen} sidebarToggle={sidebarToggle} />
       <Slider />
       <Offers />
     </div>

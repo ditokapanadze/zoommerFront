@@ -14,7 +14,6 @@ function Slider() {
       spaceBetween={0}
       slidesPerView={1}
       pagination={{ clickable: true }}
-      onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide className="slide1"></SwiperSlide>
