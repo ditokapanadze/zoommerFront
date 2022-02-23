@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Slide, Image, Flex } from "@chakra-ui/react";
+import { Box, Slide, Image, Flex, useDisclosure } from "@chakra-ui/react";
 import logo from "../../../assets/img/logo.svg";
 import { GrClose } from "react-icons/gr";
 import SidebarActions from "./SidebarActions";
@@ -11,7 +11,7 @@ import { GrGamepad } from "react-icons/gr";
 import { FiMonitor, FiCamera } from "react-icons/fi";
 
 function Sidebar({ isOpen, onToggle }) {
-  console.log(isOpen);
+  const { isOpen: authModal, onToggle: toggleAuthModal } = useDisclosure();
   const menuData = [
     { icon: <MdPhoneIphone />, text: "Mobile Phones" },
     { icon: <BsLaptop />, text: "Laptops" },
@@ -24,9 +24,18 @@ function Sidebar({ isOpen, onToggle }) {
       <Box bg="white" p={15}>
         <Flex justify="space-between" align="center">
           <Image src={logo} style={{ height: "35px" }} />
-          <GrClose onClick={onToggle} style={{ cursor: "pointer" }} />
+          <GrClose
+            onClick={() => {
+              onToggle();
+              toggleAuthModal();
+            }}
+            style={{ cursor: "pointer" }}
+          />
         </Flex>
-        <SidebarActions />
+        <SidebarActions
+          authModal={authModal}
+          toggleAuthModal={toggleAuthModal}
+        />
       </Box>
       <Box backgroundColor="#F5F5F5" pt="10px">
         <Box pt="30px" bg="white"></Box>

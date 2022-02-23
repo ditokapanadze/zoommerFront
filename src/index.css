@@ -21,3 +21,6 @@ div {
 p {
   margin: 0;
 }
+input {
+  padding-left: 5px;
+}

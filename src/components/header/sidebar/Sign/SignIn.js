@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Slide,
@@ -8,9 +8,22 @@ import {
   Input,
   Stack,
   Button,
+  useDisclosure,
+  InputGroup,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  InputRightElement,
 } from "@chakra-ui/react";
 import Register from "./Register";
-function SignIn() {
+import { VscAccount } from "react-icons/vsc";
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
+function SignIn({ toggleAuthModal }) {
+  const { isOpen, onToggle } = useDisclosure();
+  const [showPass, setShowPass] = useState(false);
+  console.log(toggleAuthModal);
   return (
     <Box
       overflow="hidden"
@@ -18,32 +31,53 @@ function SignIn() {
       px="20px"
       pb="20px"
       pt="5px"
-      width={"250px"}
-      bg="red"
+      bg="#e4dede"
+      width={"280px"}
       style={{ zIndex: 10 }}
-      position={"relative"}
+      borderRadius="5px"
     >
-      <Box
-        style={{ zIndex: 2 }}
-        w="0"
-        he="0"
-        borderStyle="solid"
-        position={"absolute"}
-        borderWidth="10px"
-        borderTopWidth="0px"
-        top="-10px"
-        left={"110px"}
-        borderColor="transparent"
-        borderBottomColor="gray"
-      ></Box>
-      <Text as="h3">ავტორიზაცია</Text>
-      <Stack spacing={3}>
-        <Input placeholder="ელ-ფოსტა" height={"30px"} outline="none" mb="5px" />
-        <Input placeholder="პაროლი" height={"30px"} outline="none" />
+      <Flex justify="space-between" pt={10}>
+        <Text as="h4" mt={0}>
+          ავტორიზაცია
+        </Text>
+        <Box m={0} cursor={"pointer"} onClick={toggleAuthModal}>
+          <AiOutlineCloseCircle />
+        </Box>
+      </Flex>
+
+      <Stack spacing={3} position={"relative"}>
+        <Flex align={"center"} justify="space-between">
+          {" "}
+          <Input
+            placeholder="ელ-ფოსტა"
+            type="email"
+            w="85%"
+            height={"30px"}
+            outline="none"
+            mb="5px"
+            type="email"
+          />
+          <VscAccount />
+        </Flex>
+        <Flex align={"center"} justify="space-between">
+          {" "}
+          <Input
+            placeholder="პაროლი"
+            type={showPass ? "text" : "password"}
+            height={"30px"}
+            w="85%"
+            outline="none"
+          />
+          <Box cursor={"pointer"} onClick={() => setShowPass(!showPass)}>
+            {showPass ? <FaRegEye /> : <FaRegEyeSlash />}
+          </Box>
+        </Flex>
+
         <Text textAlign={"right"} fontSize={"12px"}>
           დაგავიწყდა პაროლი?
         </Text>
       </Stack>
+
       <Flex justify={"space-between"} mt="15px">
         <Button
           border="none"
@@ -62,13 +96,15 @@ function SignIn() {
         <Button
           border="none"
           colorScheme="blue"
-          bg="White"
+          bg="#E4DEDE"
           color={"black"}
           fontWeight="600"
           letterSpacing={"1px"}
           cursor="pointer"
           borderRadius="5px"
           py="10px"
+          onClick={onToggle}
+          _hover={{ color: "#FF5000" }}
         >
           რეგისტრაცია
         </Button>
@@ -78,7 +114,7 @@ function SignIn() {
         justify="space-between"
         w="100%"
         opacity="0.3"
-        mt="10px"
+        my="20px"
       >
         <Box h="2px" w="40%" background={"gray"}></Box>
         <Text mb="5px" fontSize={"14px"} fontWeight="600">
@@ -86,7 +122,11 @@ function SignIn() {
         </Text>
         <Box h="2px" w="40%" background={"gray"}></Box>
       </Flex>
-      <Register />
+      <Register
+        isOpen={isOpen}
+        onToggle={onToggle}
+        toggleAuthModal={toggleAuthModal}
+      />
     </Box>
   );
 }

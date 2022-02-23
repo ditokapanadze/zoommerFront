@@ -1,18 +1,27 @@
-import React, { useState } from "react";
-import { Box, Slide, Image, Flex } from "@chakra-ui/react";
+import React, { useState, useRef, usreState } from "react";
+import { Box, Slide, Image, Flex, useDisclosure } from "@chakra-ui/react";
 import { MdAccountBox, MdChat, MdContactPhone } from "react-icons/md";
 import Sign from "./Sign/Sign";
 
-function SidebarActions() {
+function SidebarActions({ toggleAuthModal, authModal }) {
   const [showLog, setShowLog] = useState(false);
+  const { isOpen, onToggle } = useDisclosure();
+
+  let ref = useRef(null);
+  console.log("render");
   return (
     <Flex justify="space-between" alignItems={"center"} mt="20px">
       <Flex flexDirection="column" align={"center"}>
         <MdAccountBox style={{ color: "FF5400", fontSize: "34px" }} />
-        <Box as="span" fontSize={"13px"} onClick={() => setShowLog(!showLog)}>
+        <Box
+          as="span"
+          fontSize={"13px"}
+          onClick={toggleAuthModal}
+          onToggle={authModal}
+        >
           Log in
         </Box>
-        {showLog ? <Sign /> : ""}
+        <Sign isOpen={authModal} onToggle={toggleAuthModal} />
       </Flex>
       <Flex flexDirection="column" align={"center"}>
         <MdChat style={{ color: "FF5400", fontSize: "34px" }} />
